@@ -1,374 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fate in the Wind and the Sea</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      color: #f8fafc;
-      overflow-x: hidden;
-      background: 
-        linear-gradient(to bottom, rgba(18, 30, 42, 0.85), rgba(36, 52, 71, 0.85), rgba(58, 74, 94, 0.85)),
-        url('https://i.pinimg.com/originals/18/1f/b3/181fb3f559f4097f45cae5d9a9a6c7f8.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    header,
-    section,
-    footer {
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    h1,
-    h2,
-    h3 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      user-select: none;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      color: #60a5fa;
-      animation: fadeIn 2s ease-in-out, glow 4s ease-in-out infinite alternate;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: #cbd5e1;
-      margin-top: 1rem;
-      max-width: 600px;
-      animation: fadeIn 3s ease-in-out;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Petals */
-    .petal {
-      position: absolute;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/565/565547.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.7;
-      filter: drop-shadow(0 0 2px rgba(255 255 255 / 0.3));
-      will-change: transform;
-      border-radius: 50% 50% 70% 70% / 60% 60% 100% 100%;
-      pointer-events: none;
-      animation-timing-function: linear;
-      animation-name: float;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(-40px) translateX(0) rotate(0deg) scale(0.8);
-        opacity: 0.8;
-      }
-      50% {
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(100vh) translateX(20px) rotate(360deg) scale(0.8);
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes glow {
-      0% {
-        text-shadow: 0 0 10px #60a5fa;
-      }
-      100% {
-        text-shadow: 0 0 20px #3b82f6;
-      }
-    }
-
-    /* Timeline & cards */
-    .timeline .event,
-    .cards .card {
-      background: rgba(30, 41, 59, 0.85);
-      margin: 1rem;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 5px 15px rgba(0 0 0 / 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      color: #f8fafc;
-    }
-    .timeline .event:hover,
-    .cards .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(38 132 255 / 0.7);
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      width: 250px;
-    }
-
-    /* Gallery */
-    .gallery figure {
-      display: inline-block;
-      margin: 1rem;
-      text-align: center;
-      width: 250px;
-      transition: box-shadow 0.3s ease;
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-    .gallery figure:hover {
-      box-shadow: 0 0 15px 5px #60a5faaa;
-      cursor: pointer;
-    }
-    .gallery img {
-      width: 250px;
-      height: 250px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-      display: block;
-      border-radius: 1rem;
-    }
-    .gallery figure:hover img {
-      transform: scale(1.05);
-    }
-    .gallery figcaption {
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    /* Guestbook */
-    .guestbook input,
-    .guestbook textarea {
-      background: rgba(255 255 255 / 0.15);
-      border: none;
-      color: #f8fafc;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Open Sans', sans-serif;
-      transition: box-shadow 0.3s ease;
-    }
-    .guestbook input::placeholder,
-    .guestbook textarea::placeholder {
-      color: #cbd5e1;
-      opacity: 0.8;
-    }
-    .guestbook input:focus,
-    .guestbook textarea:focus {
-      outline: none;
-      box-shadow: 0 0 8px 2px #60a5fa;
-      background: rgba(255 255 255 / 0.3);
-    }
-
-    /* Button */
-    .button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #cbd5e1;
-      color: #1e293b;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .button:hover {
-      background: #f1f5f9;
-    }
-
-    /* Footer */
-    footer {
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 2rem 1rem;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 0.9rem;
-    }
-
-    /* Quote */
-    .quote {
-      max-width: 900px;
-      margin: 2rem auto;
-      font-style: italic;
-      color: #cbd5e1;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <audio autoplay loop hidden>
-    <source
-      src="https://cdn.pixabay.com/download/audio/2022/03/26/audio_e21cb81471.mp3"
-      type="audio/mpeg"
-    />
+    <source src="background-music.mp3" type="audio/mpeg">
   </audio>
 
   <header class="hero">
     <h1>Fate in the Wind and the Sea</h1>
     <p>“Even if it’s against the heavens, I will still protect you.”</p>
+    <div class="petal" style="top: -20px; left: 10%; animation-delay: 0s;"></div>
+    <div class="petal" style="top: -20px; left: 30%; animation-delay: 2s;"></div>
+    <div class="petal" style="top: -20px; left: 50%; animation-delay: 4s;"></div>
+    <div class="petal" style="top: -20px; left: 70%; animation-delay: 6s;"></div>
+    <div class="petal" style="top: -20px; left: 90%; animation-delay: 8s;"></div>
   </header>
 
   <section class="timeline">
     <h2>Their Story</h2>
-    <div class="event">
-      <h3>The Wind Master's Kindness</h3>
-      <p>Shi Qingxuan, full of light and wind, brings joy to all—yet carries a tragic fate.</p>
-    </div>
-    <div class="event">
-      <h3>The Calamity of the Sea</h3>
-      <p>He Xuan, burdened by betrayal, turns to vengeance beneath the waves.</p>
-    </div>
-    <div class="event">
-      <h3>Fate Entwined</h3>
-      <p>Through pain and time, their destinies intertwine in a bond deeper than karma.</p>
-    </div>
+    <div class="event"><h3>The Wind Master's Kindness</h3><p>Shi Qingxuan, full of light and wind, brings joy to all—yet carries a tragic fate.</p></div>
+    <div class="event"><h3>The Calamity of the Sea</h3><p>He Xuan, burdened by betrayal, turns to vengeance beneath the waves.</p></div>
+    <div class="event"><h3>Fate Entwined</h3><p>Through pain and time, their destinies intertwine in a bond deeper than karma.</p></div>
   </section>
 
   <section class="cards">
     <h2>Character Showcase</h2>
-    <div class="card">
-      <h3>Shi Qingxuan</h3>
-      <p>God of Wind, pure-hearted and radiant.</p>
-    </div>
-    <div class="card">
-      <h3>He Xuan</h3>
-      <p>Ghost King of Water, tragic and powerful.</p>
-    </div>
+    <div class="card"><h3>Shi Qingxuan</h3><p>God of Wind, pure-hearted and radiant.</p></div>
+    <div class="card"><h3>He Xuan</h3><p>Ghost King of Water, tragic and powerful.</p></div>
   </section>
 
   <section class="gallery">
     <h2>Anniversary Tribute</h2>
-
-    <figure>
-      <img
-        src="https://64.media.tumblr.com/247d1d4378f83294d60bf4c3c3b7c47a/23a7c24ac4ed912d-b7/s1280x1920/8e25eb62a8a5030e38aeeb30268d7d2696bc3e42.png"
-        alt="Heterosexual Ship - Shi Qingxuan × He Xuan"
-        loading="lazy"
-      />
-      <figcaption>Heterosexual Ship (Shi Qingxuan × He Xuan)</figcaption>
-    </figure>
-
-    <figure>
-      <img
-        src="https://i.pinimg.com/originals/0a/d9/1e/0ad91e4ef5a8e877e4b12867ac0e273a.jpg"
-        alt="Gay Ship - Men × Men Version"
-        loading="lazy"
-      />
-      <figcaption>Gay Ship (Men × Men Version)</figcaption>
-    </figure>
-
-    <figure>
-      <img
-        src="https://64.media.tumblr.com/3b556495b877ac25416822f64c11c127/f3af5e367ba3e72c-20/s1280x1920/b3e91f20679d5b7cc9f1bcd0411eaf9a7b4aa7cd.png"
-        alt="Lesbian Ship - Beefleaf Ship"
-        loading="lazy"
-      />
-      <figcaption>Lesbian Ship (Beefleaf Ship)</figcaption>
-    </figure>
+    <img src="https://i.pinimg.com/564x/7e/70/84/7e7084453eb44a94b71f48dc108f43a0.jpg" alt="Fan Art 1">
+    <img src="https://i.pinimg.com/564x/34/0f/ed/340fed3c5f296d44ddc32bc8dfb9eb36.jpg" alt="Fan Art 2">
+    <img src="https://i.pinimg.com/564x/4c/c8/0a/4cc80ac4dc3f246b3df790dd3f3b43dc.jpg" alt="Fan Art 3">
   </section>
 
   <section class="guestbook">
     <h2>Leave a Blessing</h2>
     <form onsubmit="event.preventDefault(); alert('Thank you for your blessing!')">
-      <input
-        type="text"
-        placeholder="Your Name"
-        required
-        style="padding: 0.5rem; width: 200px; margin: 0.5rem"
-      />
-      <br />
-      <textarea
-        placeholder="Your Message"
-        required
-        style="padding: 0.5rem; width: 300px; height: 100px; margin: 0.5rem"
-      ></textarea>
-      <br />
+      <input type="text" placeholder="Your Name" required>
+      <br>
+      <textarea placeholder="Your Message" required></textarea>
+      <br>
       <button type="submit" class="button">Submit</button>
     </form>
-  </section>
-
-  <section class="quote">
-    <h2>Words That Cut Deep</h2>
-    <blockquote>
-      Hua Cheng said quietly, "Your Highness, I understand your everything."
-      <br /><br />
-      "Your courage, your despair; your kindness, your pain; your resentment,
-      your hate; your intelligence, your foolishness."
-      <br /><br />
-      "If I could, I would have you use me as your stepping stone, the bridge
-      you take apart after crossing, the corpse bones you need to trample to
-      climb up, the sinner who deserved the butchering of a million knives.
-      But, I know you wouldn't allow it."
-    </blockquote>
   </section>
 
   <footer>
     <p>Created with love for the TGCF fandom — Shi Qingxuan × He Xuan Anniversary</p>
   </footer>
-
-  <script>
-    // Create petals dynamically with random sizes and animation delays
-    const hero = document.querySelector('.hero');
-
-    for (let i = 0; i < 30; i++) {
-      const petal = document.createElement('div');
-      petal.classList.add('petal');
-      petal.style.left = `${Math.random() * 100}%`;
-      petal.style.top = `${-30 - Math.random() * 100}px`;
-      petal.style.animationDelay = `${Math.random() * 12}s`;
-      petal.style.animationDuration = `${10 + Math.random() * 10}s`;
-      const size = 20 + Math.random() * 15;
-      petal.style.width = petal.style.height = `${size}px`;
-      petal.style.opacity = 0.5 + Math.random() * 0.5;
-      hero.appendChild(petal);
-    }
-
-    // Interactive petal sway effect based on mouse horizontal movement
-    document.addEventListener('mousemove', (e) => {
-      const petals = document.querySelectorAll('.petal');
-      const windowWidth = window.innerWidth;
-      const mouseXPercent = e.clientX / windowWidth - 0.5; // -0.5 to 0.5
-
-      petals.forEach((petal, i) => {
-        // Each petal gets a sway offset based on mouseXPercent and petal index for variety
-        const sway = mouseXPercent * 20 * (1 + (i % 3) * 0.5);
-        petal.style.transform = `translateX(${sway}px) translateY(calc(var(--translateY, 0))) rotate(calc(var(--rotate, 0deg))) scale(calc(var(--scale, 1)))`;
-      });
-    });
-  </script>
 </body>
 </html>
